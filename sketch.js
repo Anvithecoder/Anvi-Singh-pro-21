@@ -10,7 +10,7 @@ function preload()
 }
 
 function setup() {
-	createCanvas(800, 700);
+	createCanvas(1200, 700);
 
 
 	engine = Engine.create();
@@ -20,7 +20,7 @@ function setup() {
 
 	ground= new Ground(width/2,670,width,20)
 rigtW= new Ground(1100,600,20,120)
-leftW= new Ground(1100,600,20,120)
+leftW= new Ground(900,600,20,120)
 
 var ball_option= {
 	iStatic : false,
@@ -29,7 +29,8 @@ var ball_option= {
 	density : 1.2,
 }
 
-
+ball=Bodies.circle(100,10,20,ball_option)
+World.add(world,ball)
 
 	Engine.run(engine);
   
@@ -38,22 +39,23 @@ var ball_option= {
 
 function draw() {
   rectMode(CENTER);
+  ellipseMode(RADIUS)
   background(0);
   
-	ground.display()
-	rigtW.display()
-	leftW.display()
+	ground.show()
+	rigtW.show()
+	leftW.show()
+
+	ellipse (ball.position.x,ball.position.y,20,20)
 
 
 
-
-
-  drawSprites();
+ 
  
 }
 function keyPressed(){
 	if (keyCode===UP_ARROW){
-		Matter.Body.applyForce(ball,{x:0,y:0},{x:-0.03,y:0})
+		Matter.Body.applyForce(ball,ball.position,{x:85,y:-85},{x:85,y:-85})
 	}
 }
 
